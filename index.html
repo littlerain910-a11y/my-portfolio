@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>姚晓熙 | 品牌公关实战作品集</title>
+    <style>
+        /* 全局配色与字体 */
+        :root {
+            --bg-color: #F7F6F3; /* 米白背景 */
+            --text-main: #1A1A1A; /* 深灰主文字 */
+            --text-sub: #666666; /* 浅灰副文字 */
+            --accent-color: #B8925A; /* 质感金色 */
+            --card-bg: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+            height: 100vh;
+        }
+
+        /* 每一屏的基础设置 */
+        section {
+            height: 100vh;
+            scroll-snap-align: start;
+            padding: 8vh 10vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* 居中排版（用于封面和封底） */
+        .center-layout {
+            text-align: center;
+            align-items: center;
+        }
+
+        /* 左右分栏布局 */
+        .split-layout {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 60px;
+            align-items: center;
+            width: 100%;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        /* 文本排版细节 */
+        .page-num {
+            font-family: Georgia, serif;
+            font-size: 5rem;
+            color: #E5E3DD;
+            position: absolute;
+            top: 10vh;
+            left: 10vw;
+            line-height: 1;
+            z-index: -1;
+        }
+
+        .module-tag {
+            font-size: 0.9rem;
+            color: var(--accent-color);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        h1 {
+            font-family: Georgia, serif;
+            font-size: 4rem;
+            font-weight: normal;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .highlight {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: var(--accent-color);
+            margin-bottom: 30px;
+            border-left: 3px solid var(--accent-color);
+            padding-left: 15px;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        li {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            color: var(--text-sub);
+            position: relative;
+            padding-left: 20px;
+        }
+
+        li::before {
+            content: "•";
+            color: var(--accent-color);
+            position: absolute;
+            left: 0;
+            font-size: 1.5rem;
+            line-height: 1;
+            top: -3px;
+        }
+
+        li strong {
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        /* 大数字数据展示 */
+        .metrics-row {
+            display: flex;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .metric-item {
+            display: flex;
+            flex-direction: column;
+        }
+        .metric-num {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            font-family: Georgia, serif;
+        }
+        .metric-desc {
+            font-size: 0.9rem;
+            color: var(--text-sub);
+        }
+
+        /* 图片占位符 */
+        .image-placeholder {
+            background-color: #EBEAE5;
+            border: 2px dashed #D0CECE;
+            border-radius: 16px;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            text-align: center;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+        }
+
+        /* 导航点 */
+        .nav-dots {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 100;
+        }
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #D0CECE;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .dot.active {
+            background: var(--accent-color);
+            transform: scale(1.5);
+        }
+
+        /* 手机端适配 */
+        @media (max-width: 900px) {
+            .split-layout { grid-template-columns: 1fr; gap: 30px; }
+            .page-num { font-size: 4rem; top: 5vh; left: 5vw; }
+            section { padding: 10vh 6vw; }
+            h1 { font-size: 3rem; }
+            h2 { font-size: 1.8rem; }
+            .image-placeholder { height: 35vh; }
+            .nav-dots { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 右侧导航点 -->
+    <div class="nav-dots">
+        <div class="dot active"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+        <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+        <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+        <div class="dot"></div><div class="dot"></div>
+    </div>
+
+    <!-- P1 封面 -->
+    <section class="center-layout">
+        <h1>姚晓熙 Cecilia</h1>
+        <h2 style="font-size: 1.5rem; font-weight: normal; color: var(--text-sub);">品牌公关实战作品集</h2>
+        <div style="margin: 30px 0; font-size: 1.2rem; font-family: Georgia, serif;">BRAND PR & COMMUNICATION PORTFOLIO</div>
+        <div class="highlight" style="border: none; padding: 0;">“以公关建立信任，以内容驱动增长。”</div>
+        <!-- 替换为你的照片 -->
+        <div style="width: 150px; height: 150px; border-radius: 50%; background-color: #ddd; margin-top: 20px; overflow: hidden; display: flex; align-items: center; justify-content: center; color: #888;">
+            [此处替换为个人照片]
+        </div>
+        <div style="margin-top: 30px; color: var(--text-sub); letter-spacing: 2px;">15年品牌公关经验 | 4大实战模块 | CHENGDU 2026</div>
+    </section>
+
+    <!-- P2 目录 -->
+    <section>
+        <div class="page-num">02</div>
+        <div style="max-width: 900px; margin: 0 auto; width: 100%;">
+            <h2>目录 CONTENTS</h2>
+            <p class="highlight" style="border: none; padding: 0; color: var(--text-sub); font-size: 1.1rem; margin-bottom: 40px;">从战略翻译到增长落地——一套完整的品牌实战方法论</p>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+                <div>
+                    <h3 style="font-family: Georgia; font-size: 2rem; color: var(--accent-color);">01</h3>
+                    <h4 style="font-size: 1.2rem; margin-bottom: 10px;">品牌体系搭建</h4>
+                    <p style="color: var(--text-sub); font-size: 0.9rem;">品牌定位与话语体系 / 视觉识别与品牌诞生 / AI科技品牌跃迁</p>
+                </div>
+                <div>
+                    <h3 style="font-family: Georgia; font-size: 2rem; color: var(--accent-color);">02</h3>
+                    <h4 style="font-size: 1.2rem; margin-bottom: 10px;">公关与声誉</h4>
+                    <p style="color: var(--text-sub); font-size: 0.9rem;">融资PR全周期操盘 / 媒体矩阵与声誉管理 / 官媒联动事件营销</p>
+                </div>
+                <div>
+                    <h3 style="font-family: Georgia; font-size: 2rem; color: var(--accent-color);">03</h3>
+                    <h4 style="font-size: 1.2rem; margin-bottom: 10px;">增长型传播</h4>
+                    <p style="color: var(--text-sub); font-size: 0.9rem;">现象级出海传播 / 节庆营销与用户增长 / 用户体验全链路</p>
+                </div>
+                <div>
+                    <h3 style="font-family: Georgia; font-size: 2rem; color: var(--accent-color);">04</h3>
+                    <h4 style="font-size: 1.2rem; margin-bottom: 10px;">整合与前沿</h4>
+                    <p style="color: var(--text-sub); font-size: 0.9rem;">破圈跨界与资源整合 / AI工具重塑工作流与GEO储备</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- P3 Message House -->
+    <section>
+        <div class="page-num">03</div>
+        <div class="split-layout">
+            <div>
+                <div class="module-tag">01 品牌体系搭建</div>
+                <h2>品牌定位与话语体系</h2>
+                <div class="highlight">把抽象的“企业战略”，精准翻译为可传播的“品牌叙事”。</div>
+                <ul>
+                    <li><strong>操盘 Message House 搭建：</strong>联合凯度（KANTAR）完成品牌定位研究，输出 Umbrella Statement 与三大产品线核心信息屋。</li>
+                    <li><strong>沉淀双轨品牌资产：</strong>品牌白皮书对内统一传播口径，品牌手册对外统一品牌表达，让每次发声可复用、可沉淀。</li>
+                    <li><strong>方法论路径：</strong>目标人群分层 → 核心信息提炼 → Proof Points 支撑，形成完整话语体系。</li>
+                </ul>
+                <div class="metrics-row">
+                    <div class="metric-item"><span class="metric-num">3</span><span class="metric-desc">大产品线统一话语</span></div>
+                    <div class="metric-item"><span class="metric-num">1</span><span class="metric-desc">套品牌叙事资产</span></div>
+                </div>
+            </div>
+            <div class="image-placeholder">[此处替换为：Message House 与 品牌白皮书 截图]</div>
+        </div>
+    </section>
+
+    <!-- P4 视觉识别 -->
+    <section>
+        <div class="page-num">04</div>
+        <div class="split-layout">
+            <div>
+                <div class="module-tag">01 品牌体系搭建</div>
+                <h2>视觉识别体系与品牌诞生</h2>
+                <div class="highlight">VI 不是一套图纸，而是品牌在所有触点上的一致性表达。</div>
+                <ul>
+                    <li><strong>泽苒教育 0-1：</strong>从命名、定位到视觉体系全程搭建，半年内品牌认知度显著提升，完成“从 0 到被市场记住”。</li>
+                    <li><strong>悟空 VI 体系：</strong>主导品牌 VI 升级与 IP 形象绘制规范，制定头身比、节庆变装等应用细则，打造全球化品牌辨识度。</li>
+                    <li><strong>线下落地验证：</strong>VI 系统延伸至国际学校场景，实现线上线下视觉统一。</li>
+                </ul>
+            </div>
+            <div class="image-placeholder">[此处替换为：悟空 VI 升级与泽苒教育 LOGO 截图]</div>
+        </div>
+    </section>
+
+    <!-- P5 AI科技转型 -->
+    <section>
+        <div class="page-num">05</div>
+        <div class="split-layout">
+            <div>
+                <div class="module-tag">01 品牌体系搭建</div>
+                <h2>品牌跃迁 · AI科技</h2>
+                <div class="highlight">用技术叙事替代传统集团话语，让市场重新认识一家公司。</div>
+                <ul>
+                    <li><strong>主导定位跃迁：</strong>推动启鸣达人从“传统教育科技业务”向“AI教育科技公司”转型，重构对外话语体系。</li>
+                    <li><strong>0-1科技公关体系：</strong>建立科技/财经媒体矩阵与发声机制，突破教育媒体的单一传播路径。</li>
+                    <li><strong>抓关键传播节点：</strong>围绕大模型备案、腾讯战略合作策划传播，确立“规模化落地AI大模型”标签。</li>
+                </ul>
+            </div>
+            <div class="image-placeholder">[此处替换为：启鸣达人 AI 转型新闻截图或 WAIC 现场图]</div>
+        </div>
+    </section>
+
+    <!-- P6 融资全周期 PR -->
+    <section>
+        <div class="page-num">06</div>
+        <div class="split-layout">
+            <div>
+                <div class="module-tag">02 公关与声誉</div>
+                <h2>融资全周期 PR 操盘</h2>
+                <div class="highlight">融资 PR 不是发一篇稿，而是一场前中后期节奏化的信任建设。</div>
+                <ul>
+                    <li><strong>前期·造势：</strong>搭建海外核心财经/科技媒体关系网，与 20+ 权威教育科技媒体深度合作，为融资铺垫行业声量。</li>
+                    <li><strong>中期·定调：</strong>促成 CEO 登上国际知名论坛 HolonIQ 发声，塑造行业领袖形象；以全球最高分获 Cognia 认证。</li>
+                    <li><strong>后期·扩散：</strong>节奏化释放融资信息，核心媒体报道 100+，完成融资扩散与行业定调，促成 B 轮融资落地。</li>
+                </ul>
+            </div>
+            <div class="image-placeholder">[此处替换为：CEO 亮相 HolonIQ 及 Cognia 认证截图]</div>
+        </div>
+    </section>
+
+    <!-- P7 媒体矩阵 -->
+    <section>
+        <div class="page-num">07</div>
+        <div class="split-layout">
+            <div>
+                <div class="module-tag">02 公关与声誉</div>
+                <h2>媒体矩阵与声誉管理</h2>
+                <div class="highlight">声誉管理的上限是资源厚度，下限是监测机制。</div>
+                <ul>
+                    <li><strong>媒体资源库：</strong>36氪、虎嗅、界面、财新等 200+ 核心媒体资源，国内外核心媒体报道累计 2000+。</li>
+                    <li><strong>口碑运营体系：</strong>百度及主流平台 SEO 中正率 95%，小红书口碑重点铺设 50条/周，正面内容持续占位。</li>
+                    <li><strong>风控机制：</strong>搭建 7×24 小时全平台舆情监测与风险管控模型，连续 3 年 0 负面，重大危机处理率 90% 以上。</li>
+                </ul>
+                <div class="metrics-row">
+                    <div class="metric-item"><span class="metric-num">2000+</span><span class="metric-desc">核心媒体报道</span></div>
+                    <div class="metric-item"><span class="metric-num">0</span><span class="metric-desc">连续3年负面</span></div>
+                </div>
+            </div>
+            <div class="image-placeholder">[此处替换为：外媒报道矩阵与小红书口碑墙截图]</div>
+        </div>
+    </section>
+
+    <!-- P8 官媒联动 -->
+    <section>
+        <div class="page-num">08</div>
+        <div class="split-layout">
+            <div>
+                <div class="module-tag">02 公关与声誉</div>
+                <h2>官媒联动与事件营销</h2>
+                <div class="highlight">借官媒公信力为品牌背书，用一次策划换一季增长。</div>
+                <ul>
+                    <li><strong>策划明星学员事件：</strong>为成实外旗下国际教育品牌“泽苒教育”量身打造传播事件，联动官媒与本地 KOL 全渠道发酵。</li>
+                    <li><strong>官媒矩阵联动：</strong>成都教育发布、封面新闻、红星新闻等主流官媒同步报道，实现公信力背书。</li>
+                    <li><strong>传播战报：</strong>全网曝光破千万，互动率 >10:1，当季度学校约访率与咨询量双增长。</li>
+                </ul>
+                <div class="metrics-row">
+                    <div class="metric-item"><span class="metric-num">+50%</span><span class="metric-desc">当季约访率提升</span></div>
+                    <div class="metric-item"><span class="metric-num">+40%</span><span class="metric-desc">当季咨询量提升</span></div>
+                </div>
+            </div>
+            <div class="image-placeholder">[此处替换为：封面新闻/红星新闻等官媒报道截图]</div>
+        </div>
+    </section>
+
+    <!-- P9 现象级出海 -->
+    <section>
+        <div class="page-num">09</div>
+        <div class="split-layout">
+            <div>
+                <div class="module-tag">03 增长型传播</div>
+                <h2>现象级出海传播</h2>
+                <div class="highlight">出海传播的破局点：借势顶级IP，让用户替你讲故事。</div>
+                <ul>
+                    <li><strong>跨界明星联动：</strong>借势《西游ABC》热度，邀请吴彦祖担任特约评委，发起全球华裔家庭故事大赛。</li>
+                    <li><strong>全球传播落点：</strong>登上纽约时代广场大屏宣发，海外媒体矩阵同步落地，22个优秀故事出版成册。</li>
+                    <li><strong>UGC 裂变机制：</strong>故事征集驱动用户自生产内容，实现自然流量与注册转化双增长。</li>
+                </ul>
+                <div class="metrics-row">
+                    <div class="metric-item"><span class="metric-num">500万+</span><span class="metric-desc">海外自然曝光</span></div>
+                    <div class="metric-item"><span class="metric-num">5万+</span><span class="metric-desc">UGC内容参与</span></div>
+                    <div class="metric-item"><span class="metric-num">+25%</span><span class="metric-desc">精准注册增长</span></div>
+                </div>
+            </div>
+            <div class="image-placeholder">[此处替换为：吴彦祖纽约时代广场大屏截图]</div>
+        </div>
+    </section>
+
+    <!-- P10 节庆营销 -->
+    <section>
+        <div class="page-num">10</div>
+        <div class="split-layout">
+            <div>
+                <div class="module-tag">03 增长型传播</div>
+                <h2>节庆营销与用户增长</h2>
+                <div class="highlight">节庆不是日历上的节点，而是可复用的增长引擎。</div>
+                <ul>
+                    <li><strong>三大节庆IP，一套增长逻辑：</strong>线上裂变拉新 + 线下体验转化 + UGC 口碑发酵，每个节点都为业务端输送精准线索。</li>
+                    <li><strong>中秋盛典：</strong>年度旗舰直播，场均观看 2万+，拉新率 +32%，转化率 +18%。</li>
+                    <li><strong>万圣主题：</strong>H5裂变拉新2000+，UGC参与5000+人次，转化率+21%。</li>
+                    <li><strong>家庭日：</strong>全球亲子俱乐部，参与家庭2000+组，付费转化率+300%。</li>
+                </ul>
+            </div>
+            <div class="image-placeholder">[此处替换为：中秋主KV与家庭日线下活动拼图]</div>
+        </div>
+    </section>
+
+    <!-- P11 用户体验全链路 -->
+    <section>
+        <div class="page-num">11</div>
+        <div class="split-layout">
+            <div>
+                <div class="module-tag">03 增长型传播</div>
+                <h2>用户体验全链路</h2>
+                <div class="highlight">品牌的每一个触点，都是销售转化的前置战场。</div>
+                <ul>
+                    <li><strong>全链路拆解：</strong>基于“用户体验路径”（认知-兴趣-体验-转化-口碑），梳理品牌触达的完整链路和关键节点。</li>
+                    <li><strong>前置介入决策：</strong>以品牌内容与信任背书前置介入用户决策，为业务端输送精准线索。</li>
+                </ul>
+            </div>
+            <div class="image-placeholder">[此处替换为：C端用户体验地图拆解截图]</div>
+        </div>
+    </section>
+
+    <!-- P12 破圈跨界 -->
+    <section>
+        <div class="page-num">12</div>
+        <div class="split-layout">
+            <div>
+                <div class="module-tag">04 整合与前沿</div>
+                <h2>破圈跨界与资源整合</h2>
+                <div class="highlight">资源整合的本质，是用别人的流量池讲自己的品牌故事。</div>
+                <ul>
+                    <li><strong>影游联动标杆：</strong>主导《花千骨》手游影游联动，创业内首个营销标杆，月流水2亿；全渠道推广平均曝光量过亿。</li>
+                    <li><strong>异业资源整合：</strong>主导与 100+ 知名企业/平台跨界合作，搭建“游戏+直播”生态，单场GMV超500万。</li>
+                    <li><strong>IP资产延展：</strong>打造悟空联名盲盒卡牌、系列图书及周边矩阵，让品牌从“课程”延伸为“生活方式”。</li>
+                </ul>
+            </div>
+            <div class="image-placeholder">[此处替换为：花千骨影游联动海报与悟空盲盒卡牌]</div>
+        </div>
+    </section>
+
+    <!-- P13 前沿技术赋能 -->
+    <section>
+        <div class="page-num">13</div>
+        <div class="split-layout">
+            <div>
+                <div class="module-tag">04 整合与前沿</div>
+                <h2>前沿技术赋能</h2>
+                <div class="highlight">未来的品牌人，一半是 storyteller，一半是 AI 操盘手。</div>
+                <ul>
+                    <li><strong>AI 工具实战：</strong>熟练运用 ChatGPT、DeepSeek、Coze、WorkBuddy 重塑内容生产流——新闻稿撰写、舆情分析、创意发散人效倍增。</li>
+                    <li><strong>工作流重塑：</strong>AI 嵌入“选题 → 撰稿 → 分发 → 监测”全链路，重复劳动交给机器，判断留给人。</li>
+                    <li><strong>GEO 前瞻储备：</strong>具备 GEO（生成式引擎优化）认知，致力在 AI 搜索时代为企业抢占数字资产高地。</li>
+                </ul>
+            </div>
+            <div class="image-placeholder">[此处替换为：AI工具截图（如DeepSeek/Coze对话界面）]</div>
+        </div>
+    </section>
+
+    <!-- P14 封底 -->
+    <section class="center-layout">
+        <h2>期待与您，把下一段品牌故事讲到更高处。</h2>
+        <div style="margin-top: 40px; font-size: 1.2rem; color: var(--text-sub);">
+            <p style="color: var(--text-main); font-size: 1.5rem; margin-bottom: 10px;">姚晓熙 Cecilia</p>
+            <p>求职岗位：品牌公关 / 品牌总监</p>
+            <p>📞 15928166712 &nbsp;|&nbsp; ✉️ 175899535@qq.com &nbsp;|&nbsp; 📍 成都</p>
+        </div>
+    </section>
+
+    <!-- 滚动监听脚本 -->
+    <script>
+        const sections = document.querySelectorAll('section');
+        const dots = document.querySelectorAll('.dot');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const index = Array.from(sections).indexOf(entry.target);
+                    dots.forEach(dot => dot.classList.remove('active'));
+                    if(dots[index]) dots[index].classList.add('active');
+                }
+            });
+        }, { threshold: 0.5 });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
