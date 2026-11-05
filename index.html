@@ -14,11 +14,7 @@
             --card-bg: #FFFFFF;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
@@ -40,7 +36,6 @@
             position: relative;
         }
 
-        /* 大数字背景 */
         .page-num {
             font-family: Georgia, serif;
             font-size: 6rem;
@@ -52,7 +47,6 @@
             z-index: -1;
         }
 
-        /* 文本排版细节 */
         .module-tag {
             font-size: 0.9rem;
             color: var(--accent-color);
@@ -92,9 +86,7 @@
         .metric-num { font-size: 2.2rem; font-weight: bold; color: var(--accent-color); font-family: Georgia, serif; }
         .metric-desc { font-size: 0.9rem; color: var(--text-sub); }
 
-        /* ---------------- 布局类（核心优化） ---------------- */
-        
-        /* 1. 左文右图 */
+        /* 布局类 */
         .layout-text-left {
             display: grid;
             grid-template-columns: 1.1fr 0.9fr;
@@ -105,7 +97,6 @@
             margin: 0 auto;
         }
 
-        /* 2. 左图右文（镜像交错） */
         .layout-image-left {
             display: grid;
             grid-template-columns: 0.9fr 1.1fr;
@@ -116,18 +107,6 @@
             margin: 0 auto;
         }
 
-        /* 3. 上图下文（全宽大图） */
-        .layout-image-top {
-            display: flex;
-            flex-direction: column;
-            gap: 40px;
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .layout-image-top .text-content { max-width: 800px; margin: 0 auto; text-align: center; }
-
-        /* 4. 左右卡片式（用于节庆） */
         .layout-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -138,7 +117,6 @@
             align-items: center;
         }
 
-        /* 图片通用样式 */
         .content-img {
             width: 100%;
             border-radius: 16px;
@@ -149,7 +127,6 @@
         }
         .content-img:hover { transform: translateY(-5px); }
 
-        /* 占位符 */
         .image-placeholder {
             background-color: #EBEAE5;
             border: 2px dashed #D0CECE;
@@ -169,11 +146,8 @@
 
         /* 手机端适配 */
         @media (max-width: 900px) {
-            .layout-text-left, .layout-image-left, .layout-grid { 
-                grid-template-columns: 1fr; 
-                gap: 30px; 
-            }
-            .layout-image-left .text-content { order: 2; } /* 手机端图片优先 */
+            .layout-text-left, .layout-image-left, .layout-grid { grid-template-columns: 1fr; gap: 30px; }
+            .layout-image-left .text-content { order: 2; }
             .layout-image-left img { order: 1; }
             .page-num { font-size: 4rem; top: 5vh; left: 5vw; }
             section { padding: 10vh 6vw; height: auto; min-height: 100vh; }
@@ -182,7 +156,6 @@
             .image-placeholder { height: 35vh; }
         }
 
-        /* 右侧导航点 */
         .nav-dots { position: fixed; right: 30px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 15px; z-index: 100; }
         .dot { width: 8px; height: 8px; border-radius: 50%; background: #D0CECE; transition: 0.3s; }
         .dot.active { background: var(--accent-color); transform: scale(1.5); }
@@ -208,7 +181,7 @@
         <div class="fade-in" style="margin-top: 30px; color: var(--text-sub); letter-spacing: 2px;">15年品牌公关经验 | 4大实战模块 | CHENGDU 2026</div>
     </section>
 
-    <!-- P2 目录（保持居中） -->
+    <!-- P2 目录 -->
     <section>
         <div class="page-num">02</div>
         <div style="max-width: 900px; margin: 0 auto; width: 100%;">
@@ -261,7 +234,7 @@
         </div>
     </section>
 
-    <!-- P4 视觉识别（左图右文 - 镜像交错） -->
+    <!-- P4 视觉识别（左图右文） -->
     <section>
         <div class="page-num">04</div>
         <div class="layout-image-left fade-in">
@@ -279,11 +252,10 @@
         </div>
     </section>
 
-    <!-- P5 AI科技转型（左图右文） -->
+    <!-- P5 AI科技转型（左文右图） -->
     <section>
         <div class="page-num">05</div>
-        <div class="layout-image-left fade-in">
-            <img src="pinpaiyueqian.jpg" class="content-img" alt="AI科技转型">
+        <div class="layout-text-left fade-in">
             <div>
                 <div class="module-tag">01 品牌体系搭建</div>
                 <h2>品牌跃迁 · AI科技</h2>
@@ -294,23 +266,24 @@
                     <li><strong>抓关键传播节点：</strong>围绕大模型备案、腾讯战略合作策划传播，确立“规模化落地AI大模型”标签。</li>
                 </ul>
             </div>
+            <img src="pinpaiyueqian.jpg" class="content-img" alt="AI科技转型">
         </div>
     </section>
 
-    <!-- P6 融资全周期（上图下文 - 全宽大图） -->
+    <!-- P6 融资全周期（已修改为：左图右文） -->
     <section>
         <div class="page-num">06</div>
-        <div class="layout-image-top fade-in">
-            <div class="text-content">
+        <div class="layout-image-left fade-in">
+            <img src="rongzi.jpg" class="content-img" alt="融资全周期 PR 操盘">
+            <div>
                 <div class="module-tag">02 公关与声誉</div>
                 <h2>融资全周期 PR 操盘</h2>
-                <div class="highlight" style="border: none; padding: 0;">融资 PR 不是发一篇稿，而是一场前中后期节奏化的信任建设。</div>
-            </div>
-            <img src="rongzi.jpg" class="content-img" alt="融资全周期 PR 操盘" style="max-height: 45vh; width: auto; margin: 0 auto;">
-            <div class="text-content" style="text-align: left; max-width: 1000px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-top: 20px;">
-                <div><li><strong>前期·造势：</strong>搭建海外核心媒体关系网，20+权威媒体铺垫声量。</li></div>
-                <div><li><strong>中期·定调：</strong>促成CEO登HolonIQ发声，获Cognia认证。</li></div>
-                <div><li><strong>后期·扩散：</strong>核心报道100+，完成融资扩散与行业定调。</li></div>
+                <div class="highlight">融资 PR 不是发一篇稿，而是一场前中后期节奏化的信任建设。</div>
+                <ul>
+                    <li><strong>前期·造势：</strong>搭建海外核心财经/科技媒体关系网，与 20+ 权威教育科技媒体深度合作，为融资铺垫行业声量。</li>
+                    <li><strong>中期·定调：</strong>促成 CEO 登上国际知名论坛 HolonIQ 发声，塑造行业领袖形象；以全球最高分获 Cognia 认证。</li>
+                    <li><strong>后期·扩散：</strong>节奏化释放融资信息，核心媒体报道 100+，完成融资扩散与行业定调，促成 B 轮融资落地。</li>
+                </ul>
             </div>
         </div>
     </section>
@@ -369,7 +342,7 @@
         </div>
     </section>
 
-    <!-- P10 节庆营销（卡片排版） -->
+    <!-- P10 节庆营销（已修正图片名） -->
     <section>
         <div class="page-num">10</div>
         <div class="layout-grid fade-in">
@@ -384,15 +357,17 @@
                     <li><strong>家庭日：</strong>参与家庭2000+组，付费转化率+300%。</li>
                 </ul>
             </div>
-            <img src="jieqyingxiao.jpg" class="content-img" alt="节庆营销">
+            <!-- 图片名已修正为 jieqingyingxiao.jpg -->
+            <img src="jieqingyingxiao.jpg" class="content-img" alt="节庆营销">
         </div>
     </section>
 
-    <!-- P11 用户体验（左图右文） -->
+    <!-- P11 用户体验（已添加真实图片） -->
     <section>
         <div class="page-num">11</div>
         <div class="layout-image-left fade-in">
-            <div class="image-placeholder">[此处暂无图片，保留占位]</div>
+            <!-- 替换为真实的图片 yonghutiyan.jpg -->
+            <img src="yonghutiyan.jpg" class="content-img" alt="用户体验全链路">
             <div>
                 <div class="module-tag">03 增长型传播</div>
                 <h2>用户体验全链路</h2>
@@ -423,20 +398,20 @@
         </div>
     </section>
 
-    <!-- P13 前沿技术（上图下文） -->
+    <!-- P13 前沿技术（已修改为：左图右文） -->
     <section>
         <div class="page-num">13</div>
-        <div class="layout-image-top fade-in">
-            <div class="text-content">
+        <div class="layout-image-left fade-in">
+            <img src="aigongju.jpg" class="content-img" alt="前沿技术赋能">
+            <div>
                 <div class="module-tag">04 整合与前沿</div>
                 <h2>前沿技术赋能</h2>
-                <div class="highlight" style="border: none; padding: 0;">未来的品牌人，一半是 storyteller，一半是 AI 操盘手。</div>
-            </div>
-            <img src="aigongju.jpg" class="content-img" alt="前沿技术赋能" style="max-height: 40vh; width: auto; margin: 0 auto;">
-            <div class="text-content" style="text-align: left; max-width: 1000px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-top: 20px;">
-                <div><li><strong>AI 工具实战：</strong>熟练运用ChatGPT、Coze等重塑内容生产流。</li></div>
-                <div><li><strong>工作流重塑：</strong>AI嵌入“选题-撰稿-分发-监测”全链路。</li></div>
-                <div><li><strong>GEO 前瞻储备：</strong>在AI搜索时代为企业抢占数字资产高地。</li></div>
+                <div class="highlight">未来的品牌人，一半是 storyteller，一半是 AI 操盘手。</div>
+                <ul>
+                    <li><strong>AI 工具实战：</strong>熟练运用 ChatGPT、DeepSeek、Coze、WorkBuddy 重塑内容生产流——新闻稿撰写、舆情分析、创意发散人效倍增。</li>
+                    <li><strong>工作流重塑：</strong>AI 嵌入“选题 → 撰稿 → 分发 → 监测”全链路，重复劳动交给机器，判断留给人。</li>
+                    <li><strong>GEO 前瞻储备：</strong>具备 GEO（生成式引擎优化）认知，致力在 AI 搜索时代为企业抢占数字资产高地。</li>
+                </ul>
             </div>
         </div>
     </section>
