@@ -7,10 +7,10 @@
     <style>
         /* 全局配色与字体 */
         :root {
-            --bg-color: #F7F6F3; /* 米白背景 */
-            --text-main: #1A1A1A; /* 深灰主文字 */
-            --text-sub: #666666; /* 浅灰副文字 */
-            --accent-color: #B8925A; /* 质感金色 */
+            --bg-color: #F7F6F3;
+            --text-main: #1A1A1A;
+            --text-sub: #666666;
+            --accent-color: #B8925A;
             --card-bg: #FFFFFF;
         }
 
@@ -21,7 +21,7 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
             line-height: 1.6;
@@ -40,32 +40,19 @@
             position: relative;
         }
 
-        .center-layout {
-            text-align: center;
-            align-items: center;
-        }
-
-        .split-layout {
-            display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
-            gap: 60px;
-            align-items: center;
-            width: 100%;
-            max-width: 1300px;
-            margin: 0 auto;
-        }
-
+        /* 大数字背景 */
         .page-num {
             font-family: Georgia, serif;
-            font-size: 5rem;
+            font-size: 6rem;
             color: #E5E3DD;
             position: absolute;
-            top: 10vh;
-            left: 10vw;
+            top: 8vh;
+            left: 8vw;
             line-height: 1;
             z-index: -1;
         }
 
+        /* 文本排版细节 */
         .module-tag {
             font-size: 0.9rem;
             color: var(--accent-color);
@@ -75,20 +62,9 @@
             font-weight: 600;
         }
 
-        h1 {
-            font-family: Georgia, serif;
-            font-size: 4rem;
-            font-weight: normal;
-            margin-bottom: 20px;
-        }
-
-        h2 {
-            font-size: 2.2rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-            line-height: 1.3;
-        }
-
+        h1 { font-family: Georgia, serif; font-size: 4rem; font-weight: normal; margin-bottom: 20px; }
+        h2 { font-size: 2.2rem; font-weight: 600; margin-bottom: 20px; line-height: 1.3; }
+        
         .highlight {
             font-size: 1.3rem;
             font-weight: 500;
@@ -98,10 +74,7 @@
             padding-left: 15px;
         }
 
-        ul {
-            list-style: none;
-        }
-
+        ul { list-style: none; }
         li {
             margin-bottom: 20px;
             font-size: 1.1rem;
@@ -109,98 +82,111 @@
             position: relative;
             padding-left: 20px;
         }
-
         li::before {
-            content: "•";
-            color: var(--accent-color);
-            position: absolute;
-            left: 0;
-            font-size: 1.5rem;
-            line-height: 1;
-            top: -3px;
+            content: "•"; color: var(--accent-color); position: absolute; left: 0; font-size: 1.5rem; line-height: 1; top: -3px;
+        }
+        li strong { color: var(--text-main); font-weight: 600; }
+
+        .metrics-row { display: flex; gap: 30px; margin-top: 30px; }
+        .metric-item { display: flex; flex-direction: column; }
+        .metric-num { font-size: 2.2rem; font-weight: bold; color: var(--accent-color); font-family: Georgia, serif; }
+        .metric-desc { font-size: 0.9rem; color: var(--text-sub); }
+
+        /* ---------------- 布局类（核心优化） ---------------- */
+        
+        /* 1. 左文右图 */
+        .layout-text-left {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 60px;
+            align-items: center;
+            width: 100%;
+            max-width: 1300px;
+            margin: 0 auto;
         }
 
-        li strong {
-            color: var(--text-main);
-            font-weight: 600;
+        /* 2. 左图右文（镜像交错） */
+        .layout-image-left {
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 60px;
+            align-items: center;
+            width: 100%;
+            max-width: 1300px;
+            margin: 0 auto;
         }
 
-        .metrics-row {
-            display: flex;
-            gap: 30px;
-            margin-top: 30px;
-        }
-        .metric-item {
+        /* 3. 上图下文（全宽大图） */
+        .layout-image-top {
             display: flex;
             flex-direction: column;
+            gap: 40px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
         }
-        .metric-num {
-            font-size: 2.2rem;
-            font-weight: bold;
-            color: var(--accent-color);
-            font-family: Georgia, serif;
-        }
-        .metric-desc {
-            font-size: 0.9rem;
-            color: var(--text-sub);
+        .layout-image-top .text-content { max-width: 800px; margin: 0 auto; text-align: center; }
+
+        /* 4. 左右卡片式（用于节庆） */
+        .layout-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            width: 100%;
+            max-width: 1300px;
+            margin: 0 auto;
+            align-items: center;
         }
 
-        /* 如果缺图的占位符 */
+        /* 图片通用样式 */
+        .content-img {
+            width: 100%;
+            border-radius: 16px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        .content-img:hover { transform: translateY(-5px); }
+
+        /* 占位符 */
         .image-placeholder {
             background-color: #EBEAE5;
             border: 2px dashed #D0CECE;
             border-radius: 16px;
-            height: 60vh;
+            height: 50vh;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #999;
             text-align: center;
             padding: 40px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
         }
 
-        /* 真实图片的通用样式 */
-        .content-img {
-            width: 100%;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            object-fit: cover;
-            display: block;
-        }
+        /* 滚动动画 */
+        .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
 
-        .nav-dots {
-            position: fixed;
-            right: 30px;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            z-index: 100;
-        }
-        .dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #D0CECE;
-            transition: 0.3s;
-            cursor: pointer;
-        }
-        .dot.active {
-            background: var(--accent-color);
-            transform: scale(1.5);
-        }
-
+        /* 手机端适配 */
         @media (max-width: 900px) {
-            .split-layout { grid-template-columns: 1fr; gap: 30px; }
+            .layout-text-left, .layout-image-left, .layout-grid { 
+                grid-template-columns: 1fr; 
+                gap: 30px; 
+            }
+            .layout-image-left .text-content { order: 2; } /* 手机端图片优先 */
+            .layout-image-left img { order: 1; }
             .page-num { font-size: 4rem; top: 5vh; left: 5vw; }
-            section { padding: 10vh 6vw; }
+            section { padding: 10vh 6vw; height: auto; min-height: 100vh; }
             h1 { font-size: 3rem; }
             h2 { font-size: 1.8rem; }
             .image-placeholder { height: 35vh; }
-            .nav-dots { display: none; }
         }
+
+        /* 右侧导航点 */
+        .nav-dots { position: fixed; right: 30px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 15px; z-index: 100; }
+        .dot { width: 8px; height: 8px; border-radius: 50%; background: #D0CECE; transition: 0.3s; }
+        .dot.active { background: var(--accent-color); transform: scale(1.5); }
+        @media (max-width: 900px) { .nav-dots { display: none; } }
     </style>
 </head>
 <body>
@@ -213,54 +199,50 @@
     </div>
 
     <!-- P1 封面 -->
-    <section class="center-layout">
-        <h1>姚晓熙 Cecilia</h1>
-        <h2 style="font-size: 1.5rem; font-weight: normal; color: var(--text-sub);">品牌公关实战作品集</h2>
-        <div style="margin: 30px 0; font-size: 1.2rem; font-family: Georgia, serif;">BRAND PR & COMMUNICATION PORTFOLIO</div>
-        <div class="highlight" style="border: none; padding: 0;">“以公关建立信任，以内容驱动增长。”</div>
-        
-        <!-- 封面头像 -->
-        <img src="yaoxiaoxi.jpg" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-top: 20px;" alt="个人照片">
-        
-        <div style="margin-top: 30px; color: var(--text-sub); letter-spacing: 2px;">15年品牌公关经验 | 4大实战模块 | CHENGDU 2026</div>
+    <section style="text-align: center; align-items: center;">
+        <h1 class="fade-in">姚晓熙 Cecilia</h1>
+        <h2 class="fade-in" style="font-size: 1.5rem; font-weight: normal; color: var(--text-sub);">品牌公关实战作品集</h2>
+        <div class="fade-in" style="margin: 30px 0; font-size: 1.2rem; font-family: Georgia, serif;">BRAND PR & COMMUNICATION PORTFOLIO</div>
+        <div class="highlight fade-in" style="border: none; padding: 0;">“以公关建立信任，以内容驱动增长。”</div>
+        <img src="yaoxiaoxi.jpg" class="content-img fade-in" style="width: 150px; height: 150px; border-radius: 50%; margin-top: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);" alt="个人照片">
+        <div class="fade-in" style="margin-top: 30px; color: var(--text-sub); letter-spacing: 2px;">15年品牌公关经验 | 4大实战模块 | CHENGDU 2026</div>
     </section>
 
-    <!-- P2 目录 -->
+    <!-- P2 目录（保持居中） -->
     <section>
         <div class="page-num">02</div>
         <div style="max-width: 900px; margin: 0 auto; width: 100%;">
-            <h2>目录 CONTENTS</h2>
-            <p class="highlight" style="border: none; padding: 0; color: var(--text-sub); font-size: 1.1rem; margin-bottom: 40px;">从战略翻译到增长落地——一套完整的品牌实战方法论</p>
-            
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
-                <div>
+            <h2 class="fade-in">目录 CONTENTS</h2>
+            <p class="highlight fade-in" style="border: none; padding: 0; color: var(--text-sub); font-size: 1.1rem; margin-bottom: 40px;">从战略翻译到增长落地——一套完整的品牌实战方法论</p>
+            <div class="layout-grid fade-in" style="gap: 20px;">
+                <div style="background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
                     <h3 style="font-family: Georgia; font-size: 2rem; color: var(--accent-color);">01</h3>
                     <h4 style="font-size: 1.2rem; margin-bottom: 10px;">品牌体系搭建</h4>
-                    <p style="color: var(--text-sub); font-size: 0.9rem;">品牌定位与话语体系 / 视觉识别与品牌诞生 / AI科技品牌跃迁</p>
+                    <p style="color: var(--text-sub); font-size: 0.9rem;">品牌定位与话语体系 / 视觉识别 / AI科技品牌跃迁</p>
                 </div>
-                <div>
+                <div style="background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
                     <h3 style="font-family: Georgia; font-size: 2rem; color: var(--accent-color);">02</h3>
                     <h4 style="font-size: 1.2rem; margin-bottom: 10px;">公关与声誉</h4>
-                    <p style="color: var(--text-sub); font-size: 0.9rem;">融资PR全周期操盘 / 媒体矩阵与声誉管理 / 官媒联动事件营销</p>
+                    <p style="color: var(--text-sub); font-size: 0.9rem;">融资PR全周期 / 媒体矩阵与声誉 / 官媒联动事件</p>
                 </div>
-                <div>
+                <div style="background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
                     <h3 style="font-family: Georgia; font-size: 2rem; color: var(--accent-color);">03</h3>
                     <h4 style="font-size: 1.2rem; margin-bottom: 10px;">增长型传播</h4>
-                    <p style="color: var(--text-sub); font-size: 0.9rem;">现象级出海传播 / 节庆营销与用户增长 / 用户体验全链路</p>
+                    <p style="color: var(--text-sub); font-size: 0.9rem;">现象级出海 / 节庆营销与增长 / 用户体验全链路</p>
                 </div>
-                <div>
+                <div style="background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
                     <h3 style="font-family: Georgia; font-size: 2rem; color: var(--accent-color);">04</h3>
                     <h4 style="font-size: 1.2rem; margin-bottom: 10px;">整合与前沿</h4>
-                    <p style="color: var(--text-sub); font-size: 0.9rem;">破圈跨界与资源整合 / AI工具重塑工作流与GEO储备</p>
+                    <p style="color: var(--text-sub); font-size: 0.9rem;">破圈跨界与资源 / AI工具重塑工作流与GEO</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- P3 Message House -->
+    <!-- P3 Message House（左文右图） -->
     <section>
         <div class="page-num">03</div>
-        <div class="split-layout">
+        <div class="layout-text-left fade-in">
             <div>
                 <div class="module-tag">01 品牌体系搭建</div>
                 <h2>品牌定位与话语体系</h2>
@@ -275,15 +257,15 @@
                     <div class="metric-item"><span class="metric-num">1</span><span class="metric-desc">套品牌叙事资产</span></div>
                 </div>
             </div>
-            <!-- 插入白皮书图片 -->
             <img src="baipishu.jpg" class="content-img" alt="Message House 与 品牌白皮书">
         </div>
     </section>
 
-    <!-- P4 视觉识别 -->
+    <!-- P4 视觉识别（左图右文 - 镜像交错） -->
     <section>
         <div class="page-num">04</div>
-        <div class="split-layout">
+        <div class="layout-image-left fade-in">
+            <img src="guanmei.jpg" class="content-img" alt="VI 体系">
             <div>
                 <div class="module-tag">01 品牌体系搭建</div>
                 <h2>视觉识别体系与品牌诞生</h2>
@@ -294,15 +276,14 @@
                     <li><strong>线下落地验证：</strong>VI 系统延伸至国际学校场景，实现线上线下视觉统一。</li>
                 </ul>
             </div>
-            <!-- 插入品牌视觉图片 -->
-            <img src="pinpaishijue.jpg" class="content-img" alt="品牌视觉">
         </div>
     </section>
 
-    <!-- P5 AI科技转型 -->
+    <!-- P5 AI科技转型（左图右文） -->
     <section>
         <div class="page-num">05</div>
-        <div class="split-layout">
+        <div class="layout-image-left fade-in">
+            <img src="pinpaiyueqian.jpg" class="content-img" alt="AI科技转型">
             <div>
                 <div class="module-tag">01 品牌体系搭建</div>
                 <h2>品牌跃迁 · AI科技</h2>
@@ -313,34 +294,31 @@
                     <li><strong>抓关键传播节点：</strong>围绕大模型备案、腾讯战略合作策划传播，确立“规模化落地AI大模型”标签。</li>
                 </ul>
             </div>
-            <!-- 插入品牌跃迁图片 -->
-            <img src="pinpaiyueqian.jpg" class="content-img" alt="AI科技转型">
         </div>
     </section>
 
-    <!-- P6 融资全周期 PR -->
+    <!-- P6 融资全周期（上图下文 - 全宽大图） -->
     <section>
         <div class="page-num">06</div>
-        <div class="split-layout">
-            <div>
+        <div class="layout-image-top fade-in">
+            <div class="text-content">
                 <div class="module-tag">02 公关与声誉</div>
                 <h2>融资全周期 PR 操盘</h2>
-                <div class="highlight">融资 PR 不是发一篇稿，而是一场前中后期节奏化的信任建设。</div>
-                <ul>
-                    <li><strong>前期·造势：</strong>搭建海外核心财经/科技媒体关系网，与 20+ 权威教育科技媒体深度合作，为融资铺垫行业声量。</li>
-                    <li><strong>中期·定调：</strong>促成 CEO 登上国际知名论坛 HolonIQ 发声，塑造行业领袖形象；以全球最高分获 Cognia 认证。</li>
-                    <li><strong>后期·扩散：</strong>节奏化释放融资信息，核心媒体报道 100+，完成融资扩散与行业定调，促成 B 轮融资落地。</li>
-                </ul>
+                <div class="highlight" style="border: none; padding: 0;">融资 PR 不是发一篇稿，而是一场前中后期节奏化的信任建设。</div>
             </div>
-            <!-- 插入融资图片 -->
-            <img src="rongzi.jpg" class="content-img" alt="融资全周期 PR 操盘">
+            <img src="rongzi.jpg" class="content-img" alt="融资全周期 PR 操盘" style="max-height: 45vh; width: auto; margin: 0 auto;">
+            <div class="text-content" style="text-align: left; max-width: 1000px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-top: 20px;">
+                <div><li><strong>前期·造势：</strong>搭建海外核心媒体关系网，20+权威媒体铺垫声量。</li></div>
+                <div><li><strong>中期·定调：</strong>促成CEO登HolonIQ发声，获Cognia认证。</li></div>
+                <div><li><strong>后期·扩散：</strong>核心报道100+，完成融资扩散与行业定调。</li></div>
+            </div>
         </div>
     </section>
 
-    <!-- P7 媒体矩阵 -->
+    <!-- P7 媒体矩阵（左文右图） -->
     <section>
         <div class="page-num">07</div>
-        <div class="split-layout">
+        <div class="layout-text-left fade-in">
             <div>
                 <div class="module-tag">02 公关与声誉</div>
                 <h2>媒体矩阵与声誉管理</h2>
@@ -348,22 +326,18 @@
                 <ul>
                     <li><strong>媒体资源库：</strong>36氪、虎嗅、界面、财新等 200+ 核心媒体资源，国内外核心媒体报道累计 2000+。</li>
                     <li><strong>口碑运营体系：</strong>百度及主流平台 SEO 中正率 95%，小红书口碑重点铺设 50条/周，正面内容持续占位。</li>
-                    <li><strong>风控机制：</strong>搭建 7×24 小时全平台舆情监测与风险管控模型，连续 3 年 0 负面，重大危机处理率 90% 以上。</li>
+                    <li><strong>风控机制：</strong>搭建 7×24 小时全平台舆情监测与风险管控模型，连续 3 年 0 负面。</li>
                 </ul>
-                <div class="metrics-row">
-                    <div class="metric-item"><span class="metric-num">2000+</span><span class="metric-desc">核心媒体报道</span></div>
-                    <div class="metric-item"><span class="metric-num">0</span><span class="metric-desc">连续3年负面</span></div>
-                </div>
             </div>
-            <!-- 插入媒体矩阵图片 -->
             <img src="meitijuzhen.jpg" class="content-img" alt="媒体矩阵与声誉管理">
         </div>
     </section>
 
-    <!-- P8 官媒联动 -->
+    <!-- P8 官媒联动（左图右文） -->
     <section>
         <div class="page-num">08</div>
-        <div class="split-layout">
+        <div class="layout-image-left fade-in">
+            <img src="guanmei.jpg" class="content-img" alt="官媒联动与事件营销">
             <div>
                 <div class="module-tag">02 公关与声誉</div>
                 <h2>官媒联动与事件营销</h2>
@@ -373,20 +347,14 @@
                     <li><strong>官媒矩阵联动：</strong>成都教育发布、封面新闻、红星新闻等主流官媒同步报道，实现公信力背书。</li>
                     <li><strong>传播战报：</strong>全网曝光破千万，互动率 >10:1，当季度学校约访率与咨询量双增长。</li>
                 </ul>
-                <div class="metrics-row">
-                    <div class="metric-item"><span class="metric-num">+50%</span><span class="metric-desc">当季约访率提升</span></div>
-                    <div class="metric-item"><span class="metric-num">+40%</span><span class="metric-desc">当季咨询量提升</span></div>
-                </div>
             </div>
-            <!-- 插入官媒图片 -->
-            <img src="guanmei.jpg" class="content-img" alt="官媒联动与事件营销">
         </div>
     </section>
 
-    <!-- P9 现象级出海 -->
+    <!-- P9 现象级出海（左文右图） -->
     <section>
         <div class="page-num">09</div>
-        <div class="split-layout">
+        <div class="layout-text-left fade-in">
             <div>
                 <div class="module-tag">03 增长型传播</div>
                 <h2>现象级出海传播</h2>
@@ -396,107 +364,98 @@
                     <li><strong>全球传播落点：</strong>登上纽约时代广场大屏宣发，海外媒体矩阵同步落地，22个优秀故事出版成册。</li>
                     <li><strong>UGC 裂变机制：</strong>故事征集驱动用户自生产内容，实现自然流量与注册转化双增长。</li>
                 </ul>
-                <div class="metrics-row">
-                    <div class="metric-item"><span class="metric-num">500万+</span><span class="metric-desc">海外自然曝光</span></div>
-                    <div class="metric-item"><span class="metric-num">5万+</span><span class="metric-desc">UGC内容参与</span></div>
-                    <div class="metric-item"><span class="metric-num">+25%</span><span class="metric-desc">精准注册增长</span></div>
-                </div>
             </div>
-            <!-- 插入出海图片 -->
             <img src="chuhai.jpg" class="content-img" alt="现象级出海传播">
         </div>
     </section>
 
-    <!-- P10 节庆营销 -->
+    <!-- P10 节庆营销（卡片排版） -->
     <section>
         <div class="page-num">10</div>
-        <div class="split-layout">
+        <div class="layout-grid fade-in">
             <div>
                 <div class="module-tag">03 增长型传播</div>
                 <h2>节庆营销与用户增长</h2>
                 <div class="highlight">节庆不是日历上的节点，而是可复用的增长引擎。</div>
                 <ul>
-                    <li><strong>三大节庆IP，一套增长逻辑：</strong>线上裂变拉新 + 线下体验转化 + UGC 口碑发酵，每个节点都为业务端输送精准线索。</li>
-                    <li><strong>中秋盛典：</strong>年度旗舰直播，场均观看 2万+，拉新率 +32%，转化率 +18%。</li>
+                    <li><strong>三大节庆IP，一套增长逻辑：</strong>线上裂变拉新 + 线下体验转化 + UGC 口碑发酵。</li>
+                    <li><strong>中秋盛典：</strong>直播场均观看 2万+，拉新率 +32%，转化率 +18%。</li>
                     <li><strong>万圣主题：</strong>H5裂变拉新2000+，UGC参与5000+人次，转化率+21%。</li>
-                    <li><strong>家庭日：</strong>全球亲子俱乐部，参与家庭2000+组，付费转化率+300%。</li>
+                    <li><strong>家庭日：</strong>参与家庭2000+组，付费转化率+300%。</li>
                 </ul>
             </div>
-            <!-- 插入节庆营销图片 -->
-            <img src="jieqingyingxiao.jpg" class="content-img" alt="节庆营销">
+            <img src="jieqyingxiao.jpg" class="content-img" alt="节庆营销">
         </div>
     </section>
 
-    <!-- P11 用户体验全链路 -->
+    <!-- P11 用户体验（左图右文） -->
     <section>
         <div class="page-num">11</div>
-        <div class="split-layout">
+        <div class="layout-image-left fade-in">
+            <div class="image-placeholder">[此处暂无图片，保留占位]</div>
             <div>
                 <div class="module-tag">03 增长型传播</div>
                 <h2>用户体验全链路</h2>
                 <div class="highlight">品牌的每一个触点，都是销售转化的前置战场。</div>
                 <ul>
-                    <li><strong>全链路拆解：</strong>基于“用户体验路径”（认知-兴趣-体验-转化-口碑），梳理品牌触达的完整链路和关键节点。</li>
+                    <li><strong>全链路拆解：</strong>基于“用户体验路径”（认知-兴趣-体验-转化-口碑），梳理品牌触达的关键节点。</li>
                     <li><strong>前置介入决策：</strong>以品牌内容与信任背书前置介入用户决策，为业务端输送精准线索。</li>
                 </ul>
             </div>
-            <!-- 插入用户体验图片 -->
-            <img src="yonghutiyan.jpg" class="content-img" alt="节庆营销">
         </div>
     </section>
 
-    <!-- P12 破圈跨界 -->
+    <!-- P12 破圈跨界（左文右图） -->
     <section>
         <div class="page-num">12</div>
-        <div class="split-layout">
+        <div class="layout-text-left fade-in">
             <div>
                 <div class="module-tag">04 整合与前沿</div>
                 <h2>破圈跨界与资源整合</h2>
                 <div class="highlight">资源整合的本质，是用别人的流量池讲自己的品牌故事。</div>
                 <ul>
-                    <li><strong>影游联动标杆：</strong>主导《花千骨》手游影游联动，创业内首个营销标杆，月流水2亿；全渠道推广平均曝光量过亿。</li>
+                    <li><strong>影游联动标杆：</strong>主导《花千骨》手游影游联动，创业内首个营销标杆，月流水2亿。</li>
                     <li><strong>异业资源整合：</strong>主导与 100+ 知名企业/平台跨界合作，搭建“游戏+直播”生态，单场GMV超500万。</li>
-                    <li><strong>IP资产延展：</strong>打造悟空联名盲盒卡牌、系列图书及周边矩阵，让品牌从“课程”延伸为“生活方式”。</li>
+                    <li><strong>IP资产延展：</strong>打造悟空联名盲盒卡牌、系列图书及周边矩阵，让品牌延伸为生活方式。</li>
                 </ul>
             </div>
-            <!-- 插入跨界图片 -->
             <img src="poquankuajie.jpg" class="content-img" alt="破圈跨界">
         </div>
     </section>
 
-    <!-- P13 前沿技术赋能 -->
+    <!-- P13 前沿技术（上图下文） -->
     <section>
         <div class="page-num">13</div>
-        <div class="split-layout">
-            <div>
+        <div class="layout-image-top fade-in">
+            <div class="text-content">
                 <div class="module-tag">04 整合与前沿</div>
                 <h2>前沿技术赋能</h2>
-                <div class="highlight">未来的品牌人，一半是 storyteller，一半是 AI 操盘手。</div>
-                <ul>
-                    <li><strong>AI 工具实战：</strong>熟练运用 ChatGPT、DeepSeek、Coze、WorkBuddy 重塑内容生产流——新闻稿撰写、舆情分析、创意发散人效倍增。</li>
-                    <li><strong>工作流重塑：</strong>AI 嵌入“选题 → 撰稿 → 分发 → 监测”全链路，重复劳动交给机器，判断留给人。</li>
-                    <li><strong>GEO 前瞻储备：</strong>具备 GEO（生成式引擎优化）认知，致力在 AI 搜索时代为企业抢占数字资产高地。</li>
-                </ul>
+                <div class="highlight" style="border: none; padding: 0;">未来的品牌人，一半是 storyteller，一半是 AI 操盘手。</div>
             </div>
-            <!-- 插入AI工具图片 -->
-            <img src="aigongju.jpg" class="content-img" alt="前沿技术赋能">
+            <img src="aigongju.jpg" class="content-img" alt="前沿技术赋能" style="max-height: 40vh; width: auto; margin: 0 auto;">
+            <div class="text-content" style="text-align: left; max-width: 1000px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-top: 20px;">
+                <div><li><strong>AI 工具实战：</strong>熟练运用ChatGPT、Coze等重塑内容生产流。</li></div>
+                <div><li><strong>工作流重塑：</strong>AI嵌入“选题-撰稿-分发-监测”全链路。</li></div>
+                <div><li><strong>GEO 前瞻储备：</strong>在AI搜索时代为企业抢占数字资产高地。</li></div>
+            </div>
         </div>
     </section>
 
     <!-- P14 封底 -->
-    <section class="center-layout">
-        <h2>期待与您，把下一段品牌故事讲到更高处。</h2>
-        <div style="margin-top: 40px; font-size: 1.2rem; color: var(--text-sub);">
+    <section style="text-align: center; align-items: center;">
+        <h2 class="fade-in">期待与您，把下一段品牌故事讲到更高处。</h2>
+        <div class="fade-in" style="margin-top: 40px; font-size: 1.2rem; color: var(--text-sub);">
             <p style="color: var(--text-main); font-size: 1.5rem; margin-bottom: 10px;">姚晓熙 Cecilia</p>
             <p>求职岗位：品牌公关 / 品牌总监</p>
             <p>📞 15928166712 &nbsp;|&nbsp; ✉️ 175899535@qq.com &nbsp;|&nbsp; 📍 成都</p>
         </div>
     </section>
 
+    <!-- 交互脚本 -->
     <script>
+        // 导航点监听
         const sections = document.querySelectorAll('section');
         const dots = document.querySelectorAll('.dot');
-
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -506,10 +465,18 @@
                 }
             });
         }, { threshold: 0.5 });
+        sections.forEach(section => observer.observe(section));
 
-        sections.forEach(section => {
-            observer.observe(section);
-        });
+        // 滚动淡入动画监听
+        const fadeElements = document.querySelectorAll('.fade-in');
+        const fadeObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        fadeElements.forEach(el => fadeObserver.observe(el));
     </script>
 </body>
 </html>
